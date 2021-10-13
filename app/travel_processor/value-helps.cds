@@ -4,7 +4,7 @@ using { sap.fe.cap.travel as my } from '../../db/schema';
 // annotations for value helps
 //
 
-annotate my.Travel {
+/*annotate my.Travel {
 
   TravelStatus @Common.ValueListWithFixedValues;
 
@@ -23,9 +23,9 @@ annotate my.Travel {
       {$Type: 'Common.ValueListParameterDisplayOnly', ValueListProperty: 'WebAddress'}
     ],
     SearchSupported : true
-  };
+  };*/
 
-  to_Customer @Common.ValueList: {
+  /*to_Customer @Common.ValueList: {
     CollectionPath : 'Passenger',
     Label : 'Customer ID',
     Parameters : [
@@ -41,9 +41,9 @@ annotate my.Travel {
       {$Type: 'Common.ValueListParameterDisplayOnly', ValueListProperty: 'EMailAddress'}
     ],
     SearchSupported : true
-  };
+  };*/
 
-  CurrencyCode @Common.ValueList: {
+  /*CurrencyCode @Common.ValueList: {
     CollectionPath : 'Currencies',
     Label : '',
     Parameters : [
@@ -56,7 +56,7 @@ annotate my.Travel {
     SearchSupported : true
   };
 
-}
+}*/
 
 
 annotate my.Booking {
@@ -81,7 +81,7 @@ annotate my.Booking {
     SearchSupported : true
   };
 
-  to_Carrier @Common.ValueList: {
+ /* to_Carrier @Common.ValueList: {
     CollectionPath : 'Airline',
     Label : '',
     Parameters : [
@@ -91,8 +91,8 @@ annotate my.Booking {
     ],
     SearchSupported : true
   };
-
-  ConnectionID @Common.ValueList: {
+*/
+  /*ConnectionID @Common.ValueList: {
     CollectionPath : 'Flight',
     Label : '',
     Parameters : [
@@ -107,9 +107,9 @@ annotate my.Booking {
       {$Type: 'Common.ValueListParameterDisplayOnly', ValueListProperty: 'OccupiedSeats'}
     ],
     SearchSupported : true
-  };
+  };*/
 
-  FlightDate @Common.ValueList: {
+  /*FlightDate @Common.ValueList: {
     CollectionPath : 'Flight',
     Label : '',
     Parameters : [
@@ -124,9 +124,9 @@ annotate my.Booking {
       {$Type: 'Common.ValueListParameterDisplayOnly', ValueListProperty: 'OccupiedSeats'}
     ],
     SearchSupported : true
-  };
+  };*/
 
-  CurrencyCode @Common.ValueList: {
+  /*CurrencyCode @Common.ValueList: {
     CollectionPath : 'Currencies',
     Label : '',
     Parameters : [
@@ -137,12 +137,12 @@ annotate my.Booking {
       {$Type: 'Common.ValueListParameterDisplayOnly', ValueListProperty: 'minor'}
     ],
     SearchSupported : true
-  };
+  };*/
 
 }
 
 
-annotate my.BookingSupplement {
+/*annotate my.BookingSupplement {
 
   to_Supplement @Common.ValueList: {
     CollectionPath : 'Supplement',
@@ -168,10 +168,10 @@ annotate my.BookingSupplement {
     ],
     SearchSupported : true
   };
-}
+}*/
 
 
-annotate my.Flight {
+/*annotate my.Flight {
 
   AirlineID @Common.ValueList: {
     CollectionPath : 'Airline',
@@ -201,10 +201,10 @@ annotate my.Flight {
     SearchSupported : true
   };
 
-}
+}*/
 
 
-annotate my.FlightConnection {
+/*annotate my.FlightConnection {
 
   AirlineID @Common.ValueList: {
     CollectionPath : 'Airline',
@@ -244,10 +244,10 @@ annotate my.FlightConnection {
     SearchSupported : true
   };
 
-}
+}*/
 
 
-annotate my.Passenger {
+/*annotate my.Passenger {
 
   CountryCode @Common.ValueList : {
     CollectionPath  : 'Countries',
@@ -260,10 +260,10 @@ annotate my.Passenger {
     SearchSupported : true
   };
 
-}
+}*/
 
 
-annotate my.TravelAgency {
+/*annotate my.TravelAgency {
 
   CountryCode @Common.ValueList: {
     CollectionPath : 'Countries',
@@ -276,4 +276,4 @@ annotate my.TravelAgency {
     SearchSupported : true
   };
 
-}
+}*/

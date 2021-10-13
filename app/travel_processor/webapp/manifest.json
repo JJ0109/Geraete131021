@@ -37,9 +37,9 @@
           },
           "semanticObject": "travel",
           "action": "process",
-          "title": "Process Travels",
-          "subTitle": "Process travels",
-          "icon": "sap-icon://flight"
+          "title": "Geräteverwaltung",
+          "subTitle": "Geräteverwaltung",
+          "icon": "" 
         }
       }
     }
@@ -47,12 +47,12 @@
   "sap.ui": {
     "technology": "UI5",
     "icons": {
-      "icon": "sap-icon://flight",
-      "favIcon": "sap-icon://flight",
-      "phone": "sap-icon://flight",
-      "phone@2": "sap-icon://flight",
-      "tablet": "sap-icon://flight",
-      "tablet@2": "sap-icon://flight"
+      "icon": "",
+      "favIcon": "" ,
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": "" 
     },
     "deviceTypes": {
       "desktop": true,
@@ -97,56 +97,56 @@
       "routes": [
         {
           "pattern": ":?query:",
-          "name": "TravelList",
-          "target": "TravelList"
+          "name": "GeraetetypList",
+          "target": "GeraetetypList"
         },
         {
-          "pattern": "Travel({key}):?query:",
-          "name": "TravelObjectPage",
-          "target": "TravelObjectPage"
+          "pattern": "Geraetetyp({key}):?query:",
+          "name": "GeraetetypObjectPage",
+          "target": "GeraetetypObjectPage"
         },
         {
-          "pattern": "Travel({key})/to_Booking({key2}):?query:",
-          "name": "BookingObjectPage",
-          "target": "BookingObjectPage"
+          "pattern": "Geraetetyp({key})/to_Geraete({key2}):?query:",
+          "name": "GeraeteObjectPage",
+          "target": "GeraeteObjectPage"
         }
       ],
       "targets": {
-        "TravelList": {
+        "GeraetetypList": {
           "type": "Component",
-          "id": "TravelList",
+          "id": "GeraetetypList",
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "entitySet": "Travel",
+              "entitySet": "Geraetetyp",
               "variantManagement": "Page",
               "initialLoad": true,
               "navigation": {
-                "Travel": {
+                "Geraetetyp": {
                   "detail": {
-                    "route": "TravelObjectPage"
+                    "route": "GeraetetypObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "TravelObjectPage": {
+        "GeraetetypObjectPage": {
           "type": "Component",
-          "id": "TravelObjectPage",
+          "id": "GeraetetypObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "entitySet": "Travel",
+              "entitySet": "Geraetetyp",
               "navigation": {
-                "to_Booking": {
+                "to_Geraete": {
                   "detail": {
-                    "route": "BookingObjectPage"
+                    "route": "GeraeteObjectPage"
                   }
                 }
               },
               "controlConfiguration": {
-                "to_Booking/@com.sap.vocabularies.UI.v1.LineItem": {
+                "to_Geraete/@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable",
                      "personalization": {
@@ -163,13 +163,13 @@
             }
           }
         },
-        "BookingObjectPage": {
+        "GeraeteObjectPage": {
           "type": "Component",
-          "id": "BookingObjectPage",
+          "id": "GeraeteObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "entitySet": "Booking"
+              "entitySet": "Geraete"
             }
           }
         }

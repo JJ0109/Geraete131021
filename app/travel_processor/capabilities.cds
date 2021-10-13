@@ -1,4 +1,4 @@
-using {TravelService} from '../../srv/travel-service';
+using {GeraetetypService} from '../../srv/travel-service';
 
-annotate TravelService.Travel with @odata.draft.enabled;
-annotate TravelService.Travel with @Common.SemanticKey: [TravelID];
+annotate GeraetetypService.Geraetetyp with @odata.draft.enabled;
+annotate GeraetetypService.Geraetetyp with @Common.SemanticKey: [GeraetetypID];

@@ -1,26 +1,26 @@
-using TravelService from '../../srv/travel-service';
+using GeraetetypService from '../../srv/travel-service';
 
 //
 // annotatios that control the fiori layout
 //
 
-annotate TravelService.Travel with @UI : {
+annotate GeraetetypService.Geraetetyp with @UI : {
 
   Identification : [
-    { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.acceptTravel',   Label  : '{i18n>AcceptTravel}'   },
+   /* { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.acceptTravel',   Label  : '{i18n>AcceptTravel}'   },
     { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.rejectTravel',   Label  : '{i18n>RejectTravel}'   },
-    { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.deductDiscount', Label  : '{i18n>DeductDiscount}' }
+    { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.deductDiscount', Label  : '{i18n>DeductDiscount}' }*/
   ],
   HeaderInfo : {
-    TypeName       : '{i18n>Travel}',
-    TypeNamePlural : '{i18n>Travels}',
+    TypeName       : '{i18n>Gerätetyp}',
+    TypeNamePlural : '{i18n>Gerätetypen}',
     Title          : {
       $Type : 'UI.DataField',
-      Value : TravelID
+      Value : GeraetetypID
     },
     Description    : {
       $Type : 'UI.DataField',
-      Value : '{i18n>TravelID}'
+      Value : '{i18n>GerätetypID}'
     }
   },
   PresentationVariant : {
@@ -28,92 +28,67 @@ annotate TravelService.Travel with @UI : {
     Visualizations : ['@UI.LineItem'],
     SortOrder      : [{
       $Type      : 'Common.SortOrderType',
-      Property   : TravelID,
+      Property   : GeraetetypID,
       Descending : true
     }]
   },
   SelectionFields : [
-    TravelID,
-    to_Agency_AgencyID,
-    to_Customer_CustomerID,
-    TravelStatus_code
+    Bezeichnung,
+    //TravelStatus_code
   ],
   LineItem : [
-    { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.acceptTravel',   Label  : '{i18n>AcceptTravel}'   },
+   /* { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.acceptTravel',   Label  : '{i18n>AcceptTravel}'   },
     { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.rejectTravel',   Label  : '{i18n>RejectTravel}'   },
-    { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.deductDiscount', Label  : '{i18n>DeductDiscount}' },
-    { Value : TravelID               },
-    { Value : to_Agency_AgencyID     },
-    { Value : to_Customer_CustomerID },
-    { Value : BeginDate              },
-    { Value : EndDate                },
-    { Value : BookingFee             },
-    { Value : TotalPrice             },
-    { Value : Description            },
-    { $Type : 'UI.DataField', Value : TravelStatus_code, Criticality : TravelStatus.criticality }
+    { $Type  : 'UI.DataFieldForAction', Action : 'TravelService.deductDiscount', Label  : '{i18n>DeductDiscount}' },*/
+    { Value : GeraetetypID               },
+    { Value : Bezeichnung           },
+    { Value : Hersteller               },
+    //{ $Type : 'UI.DataField', Value : TravelStatus_code, Criticality : TravelStatus.criticality }
   ],
   Facets : [{
     $Type  : 'UI.CollectionFacet',
-    Label  : '{i18n>Travel}',
-    ID     : 'Travel',
+    Label  : '{i18n>Gerätetyp}',
+    ID     : 'Geraetetyp',
     Facets : [
       {  // travel details
         $Type  : 'UI.ReferenceFacet',
-        ID     : 'TravelData',
-        Target : '@UI.FieldGroup#TravelData',
-        Label  : '{i18n>Travel}'
-      },
-      {  // price information
-        $Type  : 'UI.ReferenceFacet',
-        ID     : 'PriceData',
-        Target : '@UI.FieldGroup#PriceData',
-        Label  : '{i18n>Prices}'
-      },
-      {  // date information
-        $Type  : 'UI.ReferenceFacet',
-        ID     : 'DateData',
-        Target : '@UI.FieldGroup#DateData',
-        Label  : '{i18n>Dates}'
+        ID     : 'GeraetetypData',
+        Target : '@UI.FieldGroup#GeraetetypData',
+        Label  : '{i18n>Allgemeine Informationen}'
       }
       ]
   }, {  // booking list
     $Type  : 'UI.ReferenceFacet',
-    Target : 'to_Booking/@UI.LineItem',
-    Label  : '{i18n>Booking}'
+    Target : 'to_Geraete/@UI.LineItem',
+    Label  : '{i18n>Gerät}'
   }],
-  FieldGroup#TravelData : { Data : [
-    { Value : TravelID               },
-    { Value : to_Agency_AgencyID     },
-    { Value : to_Customer_CustomerID },
-    { Value : Description            },
-    {
+  FieldGroup#GeraetetypData : { Data : [
+    { Value : GeraetetypID               },
+    { Value : Bezeichnung           },
+    { Value : Hersteller           },
+    { Value : Eigenschaft           },
+    { Value : Anleitung           },
+    { Value : Video          },
+   /* {
       $Type       : 'UI.DataField',
       Value       : TravelStatus_code,
       Criticality : TravelStatus.criticality,
       Label : '{i18n>Status}' // label only necessary if differs from title of element
-    }
+    }*/
   ]},
-  FieldGroup #DateData : {Data : [
-    { $Type : 'UI.DataField', Value : BeginDate },
-    { $Type : 'UI.DataField', Value : EndDate }
-  ]},
-  FieldGroup #PriceData : {Data : [
-    { $Type : 'UI.DataField', Value : BookingFee },
-    { $Type : 'UI.DataField', Value : TotalPrice }
-  ]}
 };
 
-annotate TravelService.Booking with @UI : {
+annotate GeraetetypService.Geraete with @UI : {
   Identification : [
-    { Value : BookingID },
+    { Value : GeraeteID },
   ],
   HeaderInfo : {
-    TypeName       : '{i18n>Bookings}',
-    TypeNamePlural : '{i18n>Bookings}',
-    Title          : { Value : BookingID },
+    TypeName       : '{i18n>Gerät}',
+    TypeNamePlural : '{i18n>Geräte}',
+    Title          : { Value : GeraeteID },
     Description    : {
       $Type : 'UI.DataField',
-      Value : '{i18n>BookingID}'
+      Value : '{i18n>GeräteID}'
     }
   },
   PresentationVariant : {
@@ -121,57 +96,26 @@ annotate TravelService.Booking with @UI : {
     Visualizations : ['@UI.LineItem']
   },
   SelectionFields : [],
-  LineItem : [
-    { Value : to_Carrier.AirlinePicURL,  Label : '  '},
-    { Value : BookingID,             Label : '{i18n>BookingNumber}' },
-    { Value : BookingDate            },
-    { Value : to_Customer_CustomerID },
-    { Value : to_Carrier_AirlineID   },
-    { Value : ConnectionID,          Label : '{i18n>FlightNumber}' },
-    { Value : FlightDate             },
-    { Value : FlightPrice            },
-    { Value : BookingStatus_code     }
+  LineItem : [ 
+    { Value : GeraeteID,             Label : '{i18n>GeräteID}' },
+    { Value : GeraeteStatus_code     }
   ],
   Facets : [{
     $Type  : 'UI.CollectionFacet',
-    Label  : '{i18n>Booking}',
-    ID     : 'Booking',
+    Label  : '{i18n>Gerät}',
+    ID     : 'Geraete',
     Facets : [{  // booking details
       $Type  : 'UI.ReferenceFacet',
-      ID     : 'BookingData',
-      Target : '@UI.FieldGroup#BookingData',
-      Label  : 'Booking'
+      ID     : 'GeraeteData',
+      Target : '@UI.FieldGroup#GeraeteData',
+      Label  : 'Geraete'
     }]
-  }, {  // supplements list
-    $Type  : 'UI.ReferenceFacet',
-    Target : 'to_BookSupplement/@UI.LineItem',
-    Label  : '{i18n>BookingSupplement}'
   }],
-  FieldGroup #BookingData : { Data : [
-    { Value : BookingID              },
-    { Value : BookingDate,           },
-    { Value : to_Customer_CustomerID },
-    { Value : to_Carrier_AirlineID   },
-    { Value : ConnectionID           },
-    { Value : FlightDate             },
-    { Value : FlightPrice            },
-    { Value : BookingStatus_code     }
+  FieldGroup #GeraeteData : { Data : [
+    { Value : GeraeteID              },
+    { Value : GeraeteStatus_code     },
+    { Value : Betriebsstunden        }
   ]},
 };
 
-annotate TravelService.BookingSupplement with @UI : {
-  Identification : [
-    { Value : BookingSupplementID }
-  ],
-  HeaderInfo : {
-    TypeName       : '{i18n>BookingSupplement}',
-    TypeNamePlural : '{i18n>BookingSupplements}',
-    Title          : { Value : BookingSupplementID },
-    Description    : { Value : BookingSupplementID }
-  },
-  LineItem : [
-    { Value : BookingSupplementID                                       },
-    { Value : to_Supplement_SupplementID, Label : '{i18n>ProductID}'    },
-    { Value : Price,                      Label : '{i18n>ProductPrice}' }
-  ],
-};
+

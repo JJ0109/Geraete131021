@@ -1,16 +1,11 @@
 using { sap.fe.cap.travel as my } from '../db/schema';
 
-service TravelService @(path:'/processor', requires: 'authenticated-user') {
+service GeraetetypService @(path:'/processor', requires: 'authenticated-user') {
 
-  entity Travel as projection on my.Travel actions {
-    action createTravelByTemplate() returns Travel;
-    action rejectTravel();
-    action acceptTravel();
-    action deductDiscount( percent: Percentage not null ) returns Travel;
+  entity Geraetetyp as projection on my.Geraetetyp actions {
+    action createTravelByTemplate() returns Geraetetyp;
+   /* action rejectTravel();
+    action acceptTravel();*/
   };
 
-  // Ensure all masterdata entities are available to clients
-  annotate my.MasterData with @cds.autoexpose @readonly;
 }
-
-type Percentage : Integer @assert.range: [1,100];

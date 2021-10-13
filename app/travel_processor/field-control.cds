@@ -1,4 +1,4 @@
-using TravelService from '../../srv/travel-service';
+using GeraetetypService from '../../srv/travel-service';
 
 //
 // annotations that control the behavior of fields and actions
@@ -8,24 +8,24 @@ using TravelService from '../../srv/travel-service';
 annotate cds.UUID with @Core.Computed  @odata.Type : 'Edm.String';
 
 // Add fields to control enablement of action buttons on UI
-extend projection TravelService.Travel with {
+extend projection GeraetetypService.Geraetetyp with {
   // REVISIT: shall be improved by omitting "null as"
   virtual null as acceptEnabled         : Boolean @UI.Hidden,
   virtual null as rejectEnabled         : Boolean @UI.Hidden,
   virtual null as deductDiscountEnabled : Boolean @UI.Hidden,
 }
 
-annotate TravelService.Travel with @(Common.SideEffects: {
-  SourceProperties: [BookingFee],
+annotate GeraetetypService.Geraetetyp with @(Common.SideEffects: {
+  //SourceProperties: [BookingFee],
   TargetProperties: ['TotalPrice']
 }){
-  BookingFee    @Common.FieldControl  : TravelStatus.fieldControl;
+  /*BookingFee    @Common.FieldControl  : TravelStatus.fieldControl;
   BeginDate       @Common.FieldControl  : TravelStatus.fieldControl;
   EndDate         @Common.FieldControl  : TravelStatus.fieldControl;
   to_Agency       @Common.FieldControl  : TravelStatus.fieldControl;
-  to_Customer     @Common.FieldControl  : TravelStatus.fieldControl;
+  to_Customer     @Common.FieldControl  : TravelStatus.fieldControl;*/
 
-} actions {
+} /*actions {
   rejectTravel @(
     Core.OperationAvailable : in.rejectEnabled,
     Common.SideEffects.TargetProperties : [
@@ -46,26 +46,18 @@ annotate TravelService.Travel with @(Common.SideEffects: {
     Core.OperationAvailable : in.deductDiscountEnabled,
     Common.SideEffects.TargetProperties : ['in/deductDiscountEnabled'],
   );
-}
+}*/
 
-annotate TravelService.Booking with @UI.CreateHidden : to_Travel.TravelStatus.createDeleteHidden;
+annotate GeraetetypService.Booking with @UI.CreateHidden : to_Geraetetyp.GeraetetypStatus.createDeleteHidden;
 
-annotate TravelService.Booking {
-  BookingDate   @Core.Computed;
+annotate GeraetetypService.Booking {
+  /*BookingDate   @Core.Computed;
   ConnectionID  @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   FlightDate    @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   FlightPrice   @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   BookingStatus @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   to_Carrier    @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
-  to_Customer   @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
+  to_Customer   @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;*/
 };
 
-annotate TravelService.BookingSupplement {
-  Price         @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
-  to_Supplement @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
-  to_Booking          @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
-  to_Travel           @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
 
-};
-
-annotate Currency with @Common.UnitSpecificScale : Decimals;

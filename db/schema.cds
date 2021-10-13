@@ -1,55 +1,25 @@
 using { Currency, custom.managed, sap.common.CodeList } from './common';
-using {
-  sap.fe.cap.travel.Airline,
-  sap.fe.cap.travel.Passenger,
-  sap.fe.cap.travel.TravelAgency,
-  sap.fe.cap.travel.Supplement,
-  sap.fe.cap.travel.Flight
- } from './master-data';
 
 namespace sap.fe.cap.travel;
 
-entity Travel : managed {
-  key TravelUUID : UUID;
-  TravelID       : Integer @readonly default 0;
-  BeginDate      : Date;
-  EndDate        : Date;
-  BookingFee     : Decimal(16, 3);
-  TotalPrice     : Decimal(16, 3) @readonly;
-  CurrencyCode   : Currency;
-  Description    : String(1024);
-  TravelStatus   : Association to TravelStatus  @readonly;
-  to_Agency      : Association to TravelAgency;
-  to_Customer    : Association to Passenger;
-  to_Booking     : Composition of many Booking on to_Booking.to_Travel = $self;
+entity Geraetetyp : managed {
+  key GeraetetypUUID : UUID;
+  GeraetetypID       : Integer @readonly default 0;
+  Bezeichnung        : String(1024);
+  Eigenschaft        : String(100);
+  Hersteller         : String(50);
+  Anleitung          : String(100);
+  Video              : String(100);       
+  GeraetetypStatus   : Association to GeraetetypStatus  @readonly;
+  to_Geraete         : Composition of many Geraete on to_Geraete.to_Geraetetyp = $self;
 };
 
-entity Booking : managed {
-  key BookingUUID   : UUID;
-  BookingID         : Integer @Core.Computed;
-  BookingDate       : Date;
-  ConnectionID      : String(4);
-  FlightDate        : Date;
-  FlightPrice       : Decimal(16, 3);
-  CurrencyCode      : Currency;
-  BookingStatus     : Association to BookingStatus;
-  to_BookSupplement : Composition of many BookingSupplement on to_BookSupplement.to_Booking = $self;
-  to_Carrier        : Association to Airline;
-  to_Customer       : Association to Passenger;
-  to_Travel         : Association to Travel;
-  to_Flight         : Association to Flight on  to_Flight.AirlineID = to_Carrier.AirlineID
-                                            and to_Flight.FlightDate = FlightDate
-                                            and to_Flight.ConnectionID = ConnectionID;
-};
-
-entity BookingSupplement : managed {
-  key BookSupplUUID   : UUID;
-  BookingSupplementID : Integer @Core.Computed;
-  Price               : Decimal(16, 3);
-  CurrencyCode        : Currency;
-  to_Booking          : Association to Booking;
-  to_Travel           : Association to Travel;
-  to_Supplement       : Association to Supplement;
+entity Geraete : managed {
+  key GeraeteUUID   : UUID;
+  GeraeteID         : Integer @Core.Computed;
+  GeraeteStatus     : Association to GeraeteStatus;
+  Betriebsstunden   : Integer; 
+  to_Geraetetyp         : Association to Geraetetyp;
 };
 
 
@@ -57,15 +27,17 @@ entity BookingSupplement : managed {
 //  Code Lists
 //
 
-entity BookingStatus : CodeList {
-  key code : String enum {
+entity GeraeteStatus : CodeList {
+  key code : String enum {   
+    Aktiv = 'A';
+    Deaktiv = 'D';          
     New      = 'N';
     Booked   = 'B';
     Canceled = 'X';
   };
 };
 
-entity TravelStatus : CodeList {
+entity GeraetetypStatus : CodeList {
   key code : String enum {
     Open     = 'O';
     Accepted = 'A';

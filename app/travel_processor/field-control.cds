@@ -8,14 +8,14 @@ using GeraetetypService from '../../srv/travel-service';
 annotate cds.UUID with @Core.Computed  @odata.Type : 'Edm.String';
 
 // Add fields to control enablement of action buttons on UI
-extend projection GeraetetypService.Geraetetyp with {
+/*extend projection GeraetetypService.Geraetetyp with {
   // REVISIT: shall be improved by omitting "null as"
   virtual null as acceptEnabled         : Boolean @UI.Hidden,
   virtual null as rejectEnabled         : Boolean @UI.Hidden,
   virtual null as deductDiscountEnabled : Boolean @UI.Hidden,
-}
+}*/
 
-annotate GeraetetypService.Geraetetyp with @(Common.SideEffects: {
+/*annotate GeraetetypService.Geraetetyp with @(Common.SideEffects: {
   //SourceProperties: [BookingFee],
   TargetProperties: ['TotalPrice']
 }){
@@ -25,8 +25,8 @@ annotate GeraetetypService.Geraetetyp with @(Common.SideEffects: {
   to_Agency       @Common.FieldControl  : TravelStatus.fieldControl;
   to_Customer     @Common.FieldControl  : TravelStatus.fieldControl;*/
 
-} /*actions {
-  rejectTravel @(
+//} /*actions {
+/*  rejectTravel @(
     Core.OperationAvailable : in.rejectEnabled,
     Common.SideEffects.TargetProperties : [
       'in/TravelStatus_code',
@@ -48,9 +48,11 @@ annotate GeraetetypService.Geraetetyp with @(Common.SideEffects: {
   );
 }*/
 
-annotate GeraetetypService.Booking with @UI.CreateHidden : to_Geraetetyp.GeraetetypStatus.createDeleteHidden;
 
-annotate GeraetetypService.Booking {
+
+//annotate GeraetetypService.Booking with @UI.CreateHidden : to_Geraetetyp.GeraetetypStatus.createDeleteHidden;
+
+/*annotate GeraetetypService.Booking {
   /*BookingDate   @Core.Computed;
   ConnectionID  @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   FlightDate    @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
@@ -58,6 +60,6 @@ annotate GeraetetypService.Booking {
   BookingStatus @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   to_Carrier    @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;
   to_Customer   @Common.FieldControl  : to_Travel.TravelStatus.fieldControl;*/
-};
+//};
 
 

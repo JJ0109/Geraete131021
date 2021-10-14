@@ -12,7 +12,7 @@ init() {
   /**
    * Fill in virtual elements to control status of UI elements.
    */
-  const _calculateButtonAvailability = any => {
+ /* const _calculateButtonAvailability = any => {
     const status = any.GeraetetypStatus && any.GeraetetypStatus.code || any.GeraetetypStatus_code
     any.acceptEnabled = status !== 'A'
     any.rejectEnabled = status !== 'X'
@@ -20,7 +20,7 @@ init() {
   }
   this.after ('each', 'Geraetetyp', _calculateButtonAvailability)
   this.after ('EDIT', 'Geraetetyp', _calculateButtonAvailability)
-
+*/
 
   /**
    * Fill in primary keys for new Travels.
@@ -38,13 +38,15 @@ init() {
    */
   this.before ('NEW', 'Geraete', async (req) => {
     const { to_Geraetetyp_GeraetetypUUID } = req.data
-    const { status } = await SELECT `GeraetetypStatus_code as status` .from (Geraetetyp.drafts, to_Geraetetyp_GeraetetypUUID)
-    if (status === 'X') throw req.reject (400, 'Cannot add new bookings to rejected travels.')
+    /*const { status } = await SELECT `GeraetetypStatus_code as status` .from (Geraetetyp.drafts, to_Geraetetyp_GeraetetypUUID)
+    if (status === 'X') throw req.reject (400, 'Cannot add new bookings to rejected travels.')*/
     const { maxID } = await SELECT.one `max(GeraeteID) as maxID` .from (Geraete.drafts) .where ({to_Geraetetyp_GeraetetypUUID})
     req.data.GeraeteID = maxID + 1
-    req.data.GeraeteStatus_code = 'A'
+    req.data.GeraeteStatus_code = 'N'
+    req.data.Betriebsstunden = 0.
     //req.data.BookingStatus_code = 'N'
   })
+
 
 
   //

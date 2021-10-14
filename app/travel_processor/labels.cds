@@ -12,7 +12,6 @@ annotate schema.Geraetetyp with @title: '{i18n>Gerätetyp}' {
   Hersteller  @title: '{i18n>Hersteller}';
   Anleitung  @title: '{i18n>Anleitung}';
   Video  @title: '{i18n>Video}';
-  GeraetetypStatus @title: '{i18n>GerätetypStatus}'  @Common.Text: GeraetetypStatus.name     @Common.TextArrangement: #TextOnly;
 }
 
 annotate schema.GeraetetypStatus with {

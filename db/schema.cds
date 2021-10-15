@@ -32,13 +32,16 @@ entity Geraete : managed {
 
 entity GeraeteStatus : CodeList {
   key code : String enum {  
-    Neu = 'N';     
-    Einsatzbereit = 'E';
-    Verfuegbar1 = 'V1';      
-    Verfuegbar2 = 'V2';
-    Messend = 'M';
-    Gesperrt = 'G';    
+    Neu             = 'N';     
+    Einsatzbereit   = 'E';
+    Verfuegbar1     = 'V1';      
+    Verfuegbar2     = 'V2';
+    Messend         = 'M';
+    Gesperrt        = 'G';    
   };
 };
+
+
+
 
 
